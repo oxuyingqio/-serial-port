@@ -1,9 +1,15 @@
 package cn.xuyingqi.serial.port.protocol;
 
+import java.util.Arrays;
+import java.util.List;
+
+import cn.xuyingqi.serial.port.protocol.di.AerialRechargeWrite;
+import cn.xuyingqi.serial.port.protocol.di.Di;
 import cn.xuyingqi.serial.port.protocol.model.CommunicationState;
 import cn.xuyingqi.serial.port.protocol.model.Function;
 import cn.xuyingqi.serial.port.protocol.model.TransmissionDirection;
 import cn.xuyingqi.util.util.ByteUtils;
+import cn.xuyingqi.util.util.ListFactory;
 
 /**
  * 数据报文
@@ -17,6 +23,10 @@ public class Datagram {
 	 * 默认开始字节
 	 */
 	private static final byte DEFAULT_START = 0x68;
+	/**
+	 * 默认结束字节
+	 */
+	private static final byte[] DEFAULT_END = new byte[] { 0x16 };
 
 	/**
 	 * 原型
@@ -57,6 +67,21 @@ public class Datagram {
 	public boolean fill(byte data) {
 
 		return this.prototype.fill(data);
+	}
+
+	/**
+	 * 校验
+	 * 
+	 * @return
+	 */
+	public boolean check() {
+
+		if (Arrays.equals(this.prototype.end, DEFAULT_END)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -124,9 +149,22 @@ public class Datagram {
 	 * 
 	 * @return
 	 */
-	public byte[] getData() {
+	public List<Di> getData() {
 
-		return this.prototype.data;
+		List<Di> dis = ListFactory.newInstance();
+
+		int index = 0;
+
+		Di di = null;
+		switch (this.prototype.data[0]) {
+		case 0x4B:
+			di = new AerialRechargeWrite();
+			index += ((AerialRechargeWrite) di).fill(this.prototype.data, index);
+			break;
+		}
+		dis.add(di);
+
+		return dis;
 	}
 
 	/**
@@ -154,58 +192,58 @@ public class Datagram {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("\n	开始：");
+		sb.append("	开始：");
 		sb.append(this.getBegin());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.begin.length; i < length; i++) {
 
-			sb.append(Integer.toHexString(this.prototype.begin[i]));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.begin[i])));
 			sb.append(" ");
 		}
 		sb.append("]");
 
-		sb.append("\n	地址：");
+		sb.append("	地址：");
 		sb.append(this.getAddress());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.address.length; i < length; i++) {
 
-			sb.append(Integer.toHexString(this.prototype.address[i]));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.address[i])));
 			sb.append(" ");
 		}
 		sb.append("]");
 
-		sb.append("\n	传输方向：");
+		sb.append("	传输方向：");
 		sb.append(this.getTransmissionDirection().getDesc());
-		sb.append("\n	通讯状态：");
+		sb.append("	通讯状态：");
 		sb.append(this.getCommunicationState().getDesc());
-		sb.append("\n	功能定义：");
+		sb.append("	功能定义：");
 		sb.append(this.getFunction().getDesc());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.controlCode.length; i < length; i++) {
 
-			sb.append(Integer.toHexString(this.prototype.controlCode[i]));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.controlCode[i])));
 			sb.append(" ");
 		}
 		sb.append("]");
 
-		sb.append("\n	长度：");
+		sb.append("	长度：");
 		sb.append(this.getLength());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.length.length; i < length; i++) {
 
-			sb.append(Integer.toHexString(this.prototype.length[i]));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.length[i])));
 			sb.append(" ");
 		}
 		sb.append("]");
 
-		sb.append("\n	数据域：");
-		for (int i = 0, length = this.getData().length; i < length; i++) {
+		sb.append("	数据域：");
+		List<Di> dis = this.getData();
+		for (int i = 0, length = dis.size(); i < length; i++) {
 
-			sb.append(Integer.toHexString(this.getData()[i]));
-			sb.append(" ");
+			sb.append(dis.get(i));
 		}
 
-		sb.append("\n	校验码：");
+		sb.append("	校验码：");
 		sb.append(this.getCheckCode());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.checkCode.length; i < length; i++) {
@@ -215,7 +253,7 @@ public class Datagram {
 		}
 		sb.append("]");
 
-		sb.append("\n	结束：");
+		sb.append("	结束：");
 		sb.append(this.getEnd());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.end.length; i < length; i++) {

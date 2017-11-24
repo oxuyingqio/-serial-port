@@ -3,10 +3,13 @@ package cn.xuyingqi.serial.port.test;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import cn.xuyingqi.serial.port.protocol.Datagram;
 import cn.xuyingqi.serial.port.util.SerialPortUtil;
+import cn.xuyingqi.util.util.ByteUtils;
 import cn.xuyingqi.util.util.ListFactory;
 import gnu.io.SerialPort;
 
@@ -80,7 +83,12 @@ public class Test {
 
 							if (datagram1.fill(data)) {
 
-								System.out.println("接收数据报文：" + datagram1);
+								if (datagram1.check()) {
+
+									System.out.println("接收数据报文：["
+											+ (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())) + "]"
+											+ datagram1);
+								}
 							}
 						}
 					}
@@ -123,8 +131,9 @@ public class Test {
 			@Override
 			public void run() {
 
-				SerialPortUtil.sendToPort(serialPort, new byte[] { 0x68, 0x70, (byte) 0x9F, 0x08, 0x01, 0x02, 0x0D,
-						0x4B, 0x01, 0x00, 0x00, 0x00, 0x32, 0x01, 0x01, 0x01, 0x02, 0x03, 0x04, 0x05, 0x1E, 0x16 });
+				String temp = "68 71 9F 08 01 02 0F 4B 03 0A 00 00 00 01 02 E1 07 0A 1E 0B 2D 2A 5F 16".replace(" ",
+						"");
+				SerialPortUtil.sendToPort(serialPort, ByteUtils.doubleHexString2ByteArray(temp));
 			}
 		}).start();
 
