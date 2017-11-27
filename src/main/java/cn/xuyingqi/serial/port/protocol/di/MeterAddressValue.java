@@ -1,21 +1,19 @@
 package cn.xuyingqi.serial.port.protocol.di;
 
-import java.text.SimpleDateFormat;
-
 import cn.xuyingqi.util.util.ByteUtils;
 
 /**
- * DI
+ * 表地址_值
  * 
  * @author XuYQ
  *
  */
-public abstract class Di {
+public class MeterAddressValue extends Di {
 
 	/**
-	 * 日期时间格式化
+	 * 默认DI值
 	 */
-	protected static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final byte DI = 0x19;
 
 	/**
 	 * 原型
@@ -23,9 +21,9 @@ public abstract class Di {
 	private Prototype prototype;
 
 	/**
-	 * DI
+	 * 表地址_值
 	 */
-	public Di() {
+	public MeterAddressValue() {
 
 		this.prototype = new Prototype();
 	}
@@ -39,19 +37,22 @@ public abstract class Di {
 	 *            数据索引值
 	 * @return
 	 */
+	@Override
 	public int fill(byte[] data, int index) {
+
+		index = super.fill(data, index);
 
 		return this.prototype.fill(data, index);
 	}
 
 	/**
-	 * 获取DI
+	 * 获取表地址
 	 * 
 	 * @return
 	 */
-	public String getDi() {
+	public Long getMeterAddress() {
 
-		return Integer.toHexString(ByteUtils.byteArray2Int(this.prototype.di));
+		return ByteUtils.byteArray2Long(ByteUtils.reverse(this.prototype.meterAddress));
 	}
 
 	@Override
@@ -59,13 +60,15 @@ public abstract class Di {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("		DI：");
-		sb.append(this.getDi());
+		sb.append(super.toString());
+
+		sb.append("		表地址：");
+		sb.append(this.getMeterAddress());
 		sb.append(" [");
-		for (int i = 0, length = this.prototype.di.length; i < length; i++) {
+		for (int i = 0, length = this.prototype.meterAddress.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.di[i])));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meterAddress[i])));
 		}
 		sb.append("]");
 
@@ -81,14 +84,14 @@ public abstract class Di {
 	private class Prototype {
 
 		/**
-		 * DI默认长度
+		 * 表地址默认长度
 		 */
-		private static final int DI_LENGTH = 1;
+		private static final int METER_ADDRESS_LENGTH = 4;
 
 		/**
-		 * DI
+		 * 表地址
 		 */
-		private byte[] di = new byte[DI_LENGTH];
+		private byte[] meterAddress = new byte[METER_ADDRESS_LENGTH];
 
 		/**
 		 * 填充数据
@@ -99,8 +102,8 @@ public abstract class Di {
 		 */
 		public int fill(byte[] data, int index) {
 
-			System.arraycopy(data, index, this.di, 0, this.di.length);
-			index += this.di.length;
+			System.arraycopy(data, index, this.meterAddress, 0, this.meterAddress.length);
+			index += this.meterAddress.length;
 
 			return index;
 		}

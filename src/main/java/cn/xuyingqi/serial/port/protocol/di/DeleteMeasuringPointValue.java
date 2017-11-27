@@ -1,21 +1,19 @@
 package cn.xuyingqi.serial.port.protocol.di;
 
-import java.text.SimpleDateFormat;
-
 import cn.xuyingqi.util.util.ByteUtils;
 
 /**
- * DI
+ * 删除测量点_值
  * 
  * @author XuYQ
  *
  */
-public abstract class Di {
+public class DeleteMeasuringPointValue extends Di {
 
 	/**
-	 * 日期时间格式化
+	 * 默认DI值
 	 */
-	protected static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final byte DI = 0x1E;
 
 	/**
 	 * 原型
@@ -23,9 +21,9 @@ public abstract class Di {
 	private Prototype prototype;
 
 	/**
-	 * DI
+	 * 删除测量点_值
 	 */
-	public Di() {
+	public DeleteMeasuringPointValue() {
 
 		this.prototype = new Prototype();
 	}
@@ -39,19 +37,22 @@ public abstract class Di {
 	 *            数据索引值
 	 * @return
 	 */
+	@Override
 	public int fill(byte[] data, int index) {
+
+		index = super.fill(data, index);
 
 		return this.prototype.fill(data, index);
 	}
 
 	/**
-	 * 获取DI
+	 * 获取测量点号
 	 * 
 	 * @return
 	 */
-	public String getDi() {
+	public Integer getMeasuringPoint() {
 
-		return Integer.toHexString(ByteUtils.byteArray2Int(this.prototype.di));
+		return ByteUtils.byteArray2Int(ByteUtils.reverse(this.prototype.measuringPoint));
 	}
 
 	@Override
@@ -59,13 +60,15 @@ public abstract class Di {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("		DI：");
-		sb.append(this.getDi());
+		sb.append(super.toString());
+
+		sb.append("		测量点号：");
+		sb.append(this.getMeasuringPoint());
 		sb.append(" [");
-		for (int i = 0, length = this.prototype.di.length; i < length; i++) {
+		for (int i = 0, length = this.prototype.measuringPoint.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.di[i])));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.measuringPoint[i])));
 		}
 		sb.append("]");
 
@@ -81,14 +84,14 @@ public abstract class Di {
 	private class Prototype {
 
 		/**
-		 * DI默认长度
+		 * 测量点号默认长度
 		 */
-		private static final int DI_LENGTH = 1;
+		private static final int MEASURING_POINT_LENGTH = 2;
 
 		/**
-		 * DI
+		 * 测量点号
 		 */
-		private byte[] di = new byte[DI_LENGTH];
+		private byte[] measuringPoint = new byte[MEASURING_POINT_LENGTH];
 
 		/**
 		 * 填充数据
@@ -99,8 +102,8 @@ public abstract class Di {
 		 */
 		public int fill(byte[] data, int index) {
 
-			System.arraycopy(data, index, this.di, 0, this.di.length);
-			index += this.di.length;
+			System.arraycopy(data, index, this.measuringPoint, 0, this.measuringPoint.length);
+			index += this.measuringPoint.length;
 
 			return index;
 		}

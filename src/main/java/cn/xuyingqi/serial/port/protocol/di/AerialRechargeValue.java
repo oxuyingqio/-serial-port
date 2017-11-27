@@ -10,12 +10,17 @@ import cn.xuyingqi.serial.port.protocol.model.RechargeType;
 import cn.xuyingqi.util.util.ByteUtils;
 
 /**
- * 空中充值_写
+ * 空中充值_值
  * 
  * @author XuYQ
  *
  */
-public class AerialRechargeWrite extends Di {
+public class AerialRechargeValue extends Di {
+
+	/**
+	 * 默认DI值
+	 */
+	public static final byte DI = 0x4B;
 
 	/**
 	 * 原型
@@ -23,38 +28,28 @@ public class AerialRechargeWrite extends Di {
 	private Prototype prototype;
 
 	/**
-	 * 空中充值_写
+	 * 空中充值_值
 	 */
-	public AerialRechargeWrite() {
+	public AerialRechargeValue() {
 
 		this.prototype = new Prototype();
 	}
 
 	/**
+	 * 填充数据
 	 * 
 	 * @param data
+	 *            数据
+	 * @param index
+	 *            数据索引值
 	 * @return
 	 */
+	@Override
 	public int fill(byte[] data, int index) {
 
-		index += this.setDi(data, index);
+		index = super.fill(data, index);
 
-		System.arraycopy(data, index, this.prototype.serialNumber, 0, this.prototype.serialNumber.length);
-		index += this.prototype.serialNumber.length;
-
-		System.arraycopy(data, index, this.prototype.rechargeData, 0, this.prototype.rechargeData.length);
-		index += this.prototype.rechargeData.length;
-
-		System.arraycopy(data, index, this.prototype.rechargeType, 0, this.prototype.rechargeType.length);
-		index += this.prototype.rechargeType.length;
-
-		System.arraycopy(data, index, this.prototype.random, 0, this.prototype.random.length);
-		index += this.prototype.random.length;
-
-		System.arraycopy(data, index, this.prototype.dateTime, 0, this.prototype.dateTime.length);
-		index += this.prototype.dateTime.length;
-
-		return index;
+		return this.prototype.fill(data, index);
 	}
 
 	/**
@@ -225,5 +220,32 @@ public class AerialRechargeWrite extends Di {
 		 * 日期时间
 		 */
 		private byte[] dateTime = new byte[DATE_TIME_LENGTH];
+
+		/**
+		 * 填充数据
+		 * 
+		 * @param data
+		 * @param index
+		 * @return
+		 */
+		public int fill(byte[] data, int index) {
+
+			System.arraycopy(data, index, this.serialNumber, 0, this.serialNumber.length);
+			index += this.serialNumber.length;
+
+			System.arraycopy(data, index, this.rechargeData, 0, this.rechargeData.length);
+			index += this.rechargeData.length;
+
+			System.arraycopy(data, index, this.rechargeType, 0, this.rechargeType.length);
+			index += this.rechargeType.length;
+
+			System.arraycopy(data, index, this.random, 0, this.random.length);
+			index += this.random.length;
+
+			System.arraycopy(data, index, this.dateTime, 0, this.dateTime.length);
+			index += this.dateTime.length;
+
+			return index;
+		}
 	}
 }

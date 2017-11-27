@@ -3,7 +3,8 @@ package cn.xuyingqi.serial.port.protocol;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.xuyingqi.serial.port.protocol.di.AerialRechargeWrite;
+import cn.xuyingqi.serial.port.protocol.di.AerialRechargeConfirm;
+import cn.xuyingqi.serial.port.protocol.di.AerialRechargeValue;
 import cn.xuyingqi.serial.port.protocol.di.Di;
 import cn.xuyingqi.serial.port.protocol.model.CommunicationState;
 import cn.xuyingqi.serial.port.protocol.model.Function;
@@ -18,15 +19,6 @@ import cn.xuyingqi.util.util.ListFactory;
  *
  */
 public class Datagram {
-
-	/**
-	 * 默认开始字节
-	 */
-	private static final byte DEFAULT_START = 0x68;
-	/**
-	 * 默认结束字节
-	 */
-	private static final byte[] DEFAULT_END = new byte[] { 0x16 };
 
 	/**
 	 * 原型
@@ -49,7 +41,7 @@ public class Datagram {
 	 */
 	public static final Datagram newInstance(byte data) {
 
-		if (data == DEFAULT_START) {
+		if (data == Prototype.DEFAULT_START) {
 
 			return new Datagram();
 		} else {
@@ -76,12 +68,7 @@ public class Datagram {
 	 */
 	public boolean check() {
 
-		if (Arrays.equals(this.prototype.end, DEFAULT_END)) {
-
-			return true;
-		}
-
-		return false;
+		return this.prototype.check();
 	}
 
 	/**
@@ -151,18 +138,41 @@ public class Datagram {
 	 */
 	public List<Di> getData() {
 
+		// DI集合
 		List<Di> dis = ListFactory.newInstance();
 
+		// 索引值
 		int index = 0;
+		// 遍历循环
+		while (index < this.prototype.data.length) {
 
-		Di di = null;
-		switch (this.prototype.data[0]) {
-		case 0x4B:
-			di = new AerialRechargeWrite();
-			index += ((AerialRechargeWrite) di).fill(this.prototype.data, index);
-			break;
+			// DI
+			Di di = null;
+
+			if (this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
+					&& this.getFunction() == Function.WRITE) {
+
+				switch (this.prototype.data[index]) {
+				case AerialRechargeValue.DI:
+					di = new AerialRechargeValue();
+					break;
+				}
+			} else if (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
+					&& this.getFunction() == Function.WRITE) {
+
+				switch (this.prototype.data[index]) {
+				case AerialRechargeConfirm.DI:
+					di = new AerialRechargeConfirm();
+					break;
+				}
+			}
+
+			if (di != null) {
+
+				index += di.fill(this.prototype.data, index);
+				dis.add(di);
+			}
 		}
-		dis.add(di);
 
 		return dis;
 	}
@@ -273,6 +283,15 @@ public class Datagram {
 	 *
 	 */
 	private class Prototype {
+
+		/**
+		 * 默认开始字节
+		 */
+		private static final byte DEFAULT_START = 0x68;
+		/**
+		 * 默认结束字节
+		 */
+		private static final byte DEFAULT_END = 0x16;
 
 		/**
 		 * 开始默认长度
@@ -421,6 +440,22 @@ public class Datagram {
 			}
 
 			return false;
+		}
+
+		/**
+		 * 校验
+		 * 
+		 * @return
+		 */
+		public boolean check() {
+
+			if (Arrays.equals(this.end, new byte[] { DEFAULT_END })) {
+
+				return true;
+			} else {
+
+				return false;
+			}
 		}
 	}
 

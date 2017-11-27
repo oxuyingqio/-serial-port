@@ -1,21 +1,19 @@
 package cn.xuyingqi.serial.port.protocol.di;
 
-import java.text.SimpleDateFormat;
-
 import cn.xuyingqi.util.util.ByteUtils;
 
 /**
- * DI
+ * 阀门_值
  * 
  * @author XuYQ
  *
  */
-public abstract class Di {
+public class ValveValue extends Di {
 
 	/**
-	 * 日期时间格式化
+	 * 默认DI值
 	 */
-	protected static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final byte DI = 0x44;
 
 	/**
 	 * 原型
@@ -23,9 +21,9 @@ public abstract class Di {
 	private Prototype prototype;
 
 	/**
-	 * DI
+	 * 阀门_值
 	 */
-	public Di() {
+	public ValveValue() {
 
 		this.prototype = new Prototype();
 	}
@@ -39,19 +37,22 @@ public abstract class Di {
 	 *            数据索引值
 	 * @return
 	 */
+	@Override
 	public int fill(byte[] data, int index) {
+
+		index = super.fill(data, index);
 
 		return this.prototype.fill(data, index);
 	}
 
 	/**
-	 * 获取DI
+	 * 获取控制
 	 * 
 	 * @return
 	 */
-	public String getDi() {
+	public Short getControl() {
 
-		return Integer.toHexString(ByteUtils.byteArray2Int(this.prototype.di));
+		return ByteUtils.byteArray2Short(this.prototype.control);
 	}
 
 	@Override
@@ -59,13 +60,15 @@ public abstract class Di {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("		DI：");
-		sb.append(this.getDi());
+		sb.append(super.toString());
+
+		sb.append("		控制：");
+		sb.append(this.getControl());
 		sb.append(" [");
-		for (int i = 0, length = this.prototype.di.length; i < length; i++) {
+		for (int i = 0, length = this.prototype.control.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.di[i])));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.control[i])));
 		}
 		sb.append("]");
 
@@ -81,14 +84,14 @@ public abstract class Di {
 	private class Prototype {
 
 		/**
-		 * DI默认长度
+		 * 控制默认长度
 		 */
-		private static final int DI_LENGTH = 1;
+		private static final int CONTROL_LENGTH = 1;
 
 		/**
-		 * DI
+		 * 控制
 		 */
-		private byte[] di = new byte[DI_LENGTH];
+		private byte[] control = new byte[CONTROL_LENGTH];
 
 		/**
 		 * 填充数据
@@ -99,8 +102,8 @@ public abstract class Di {
 		 */
 		public int fill(byte[] data, int index) {
 
-			System.arraycopy(data, index, this.di, 0, this.di.length);
-			index += this.di.length;
+			System.arraycopy(data, index, this.control, 0, this.control.length);
+			index += this.control.length;
 
 			return index;
 		}

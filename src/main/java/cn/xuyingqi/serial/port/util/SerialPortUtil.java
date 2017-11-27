@@ -35,17 +35,17 @@ public class SerialPortUtil {
 	public static final List<String> findCommPorts() {
 
 		// 可用端口名称集合
-		List<String> commPorts = ListFactory.newInstance();
+		List<String> commPortNames = ListFactory.newInstance();
 
 		// 获得可用端口集合
-		Enumeration<CommPortIdentifier> portList = CommPortIdentifier.getPortIdentifiers();
+		Enumeration<CommPortIdentifier> commPorts = CommPortIdentifier.getPortIdentifiers();
 		// 遍历可用端口集合
-		while (portList.hasMoreElements()) {
+		while (commPorts.hasMoreElements()) {
 
-			commPorts.add(portList.nextElement().getName());
+			commPortNames.add(commPorts.nextElement().getName());
 		}
 
-		return commPorts;
+		return commPortNames;
 	}
 
 	/**
@@ -107,8 +107,10 @@ public class SerialPortUtil {
 				serialPort.getInputStream().close();
 				serialPort.getOutputStream().close();
 				serialPort.close();
+
 				serialPort = null;
 			} catch (IOException e) {
+
 				e.printStackTrace();
 			}
 		}
@@ -145,6 +147,7 @@ public class SerialPortUtil {
 				if (out != null) {
 
 					out.close();
+
 					out = null;
 				}
 			} catch (IOException e) {
