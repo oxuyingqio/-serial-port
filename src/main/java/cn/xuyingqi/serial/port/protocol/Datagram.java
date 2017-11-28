@@ -3,9 +3,45 @@ package cn.xuyingqi.serial.port.protocol;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.xuyingqi.serial.port.protocol.di.AerialRechargeConfirm;
-import cn.xuyingqi.serial.port.protocol.di.AerialRechargeValue;
 import cn.xuyingqi.serial.port.protocol.di.Di;
+import cn.xuyingqi.serial.port.protocol.di.impl.AerialRechargeConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.AerialRechargeValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.ApplicationMeasuringPoint;
+import cn.xuyingqi.serial.port.protocol.di.impl.Day;
+import cn.xuyingqi.serial.port.protocol.di.impl.DeleteMeasuringPointConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.DeleteMeasuringPointValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.DiurnalFreezingDataConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.DiurnalFreezingDataValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeasuringPointConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeasuringPointValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterAddressConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterAddressValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterAttributeConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterAttributeValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterOperationParamConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterOperationParamValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeterSet;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeteringOperationParamConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.MeteringOperationParamValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.MonthlyFrozenDataConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.MonthlyFrozenDataValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.NetworkingConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.NetworkingValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.ReportTimeConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.ReportTimeValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.SettlementSchemeConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.SettlementSchemeValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.TerminalRssi;
+import cn.xuyingqi.serial.port.protocol.di.impl.TimingConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.TimingValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.ValveConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.ValveValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.VersionConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.VersionValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.WakeUpTimeConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.WakeUpTimeValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.WirelessParamConfirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.WirelessParamValue;
 import cn.xuyingqi.serial.port.protocol.model.CommunicationState;
 import cn.xuyingqi.serial.port.protocol.model.Function;
 import cn.xuyingqi.serial.port.protocol.model.TransmissionDirection;
@@ -149,28 +185,155 @@ public class Datagram {
 			// DI
 			Di di = null;
 
-			if (this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
-					&& this.getFunction() == Function.WRITE) {
+			// DI值
+			byte diValue = this.prototype.data[index];
+			// 判断DI值
+			switch (diValue) {
+			case TerminalRssi.DI:
+				di = new TerminalRssi();
+				break;
+			case ApplicationMeasuringPoint.DI:
+				di = new ApplicationMeasuringPoint();
+				break;
+			case Day.DI:
+				di = new Day();
+				break;
+			case MeterSet.DI:
+				di = new MeterSet();
+				break;
+			default:
+				if ((this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
+						&& this.getFunction() == Function.WRITE)
+						|| (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
+								&& this.getFunction() == Function.READ)) {
 
-				switch (this.prototype.data[index]) {
-				case AerialRechargeValue.DI:
-					di = new AerialRechargeValue();
-					break;
-				}
-			} else if (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
-					&& this.getFunction() == Function.WRITE) {
+					switch (diValue) {
+					case TimingValue.DI:
+						di = new TimingValue();
+						break;
+					case MeterAddressValue.DI:
+						di = new MeterAddressValue();
+						break;
+					case VersionValue.DI:
+						di = new VersionValue();
+						break;
+					case MeasuringPointValue.DI:
+						di = new MeasuringPointValue();
+						break;
+					case DeleteMeasuringPointValue.DI:
+						di = new DeleteMeasuringPointValue();
+						break;
+					case MeterAttributeValue.DI:
+						di = new MeterAttributeValue();
+						break;
+					case WirelessParamValue.DI:
+						di = new WirelessParamValue();
+						break;
+					case MeterOperationParamValue.DI:
+						di = new MeterOperationParamValue();
+						break;
+					case ReportTimeValue.DI:
+						di = new ReportTimeValue();
+						break;
+					case WakeUpTimeValue.DI:
+						di = new WakeUpTimeValue();
+						break;
+					case MeteringOperationParamValue.DI:
+						di = new MeteringOperationParamValue();
+						break;
+					case SettlementSchemeValue.DI:
+						di = new SettlementSchemeValue();
+						break;
 
-				switch (this.prototype.data[index]) {
-				case AerialRechargeConfirm.DI:
-					di = new AerialRechargeConfirm();
-					break;
+					case ValveConfirm.DI:
+						di = new ValveConfirm();
+						break;
+
+					case NetworkingValue.DI:
+						di = new NetworkingValue();
+						break;
+					case DiurnalFreezingDataValue.DI:
+						di = new DiurnalFreezingDataValue();
+						break;
+					case MonthlyFrozenDataValue.DI:
+						di = new MonthlyFrozenDataValue();
+						break;
+					case AerialRechargeValue.DI:
+						di = new AerialRechargeValue();
+						break;
+					}
+				} else if ((this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
+						&& this.getFunction() == Function.WRITE)
+						|| (this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
+								&& this.getFunction() == Function.READ)) {
+
+					switch (diValue) {
+					case TimingConfirm.DI:
+						di = new TimingConfirm();
+						break;
+					case MeterAddressConfirm.DI:
+						di = new MeterAddressConfirm();
+						break;
+					case VersionConfirm.DI:
+						di = new VersionConfirm();
+						break;
+					case MeasuringPointConfirm.DI:
+						di = new MeasuringPointConfirm();
+						break;
+					case DeleteMeasuringPointConfirm.DI:
+						di = new DeleteMeasuringPointConfirm();
+						break;
+					case MeterAttributeConfirm.DI:
+						di = new MeterAttributeConfirm();
+						break;
+					case WirelessParamConfirm.DI:
+						di = new WirelessParamConfirm();
+						break;
+					case MeterOperationParamConfirm.DI:
+						di = new MeterOperationParamConfirm();
+						break;
+					case ReportTimeConfirm.DI:
+						di = new ReportTimeConfirm();
+						break;
+					case WakeUpTimeConfirm.DI:
+						di = new WakeUpTimeConfirm();
+						break;
+					case MeteringOperationParamConfirm.DI:
+						di = new MeteringOperationParamConfirm();
+						break;
+					case SettlementSchemeConfirm.DI:
+						di = new SettlementSchemeConfirm();
+						break;
+
+					case ValveValue.DI:
+						di = new ValveValue();
+						break;
+						
+					case NetworkingConfirm.DI:
+						di = new NetworkingConfirm();
+						break;
+					case DiurnalFreezingDataConfirm.DI:
+						di = new DiurnalFreezingDataConfirm();
+						break;
+					case MonthlyFrozenDataConfirm.DI:
+						di = new MonthlyFrozenDataConfirm();
+						break;
+					case AerialRechargeConfirm.DI:
+						di = new AerialRechargeConfirm();
+						break;
+					}
 				}
+
+				break;
 			}
 
 			if (di != null) {
 
 				index += di.fill(this.prototype.data, index);
 				dis.add(di);
+			} else {
+
+				index += 1;
 			}
 		}
 
@@ -195,6 +358,16 @@ public class Datagram {
 	public String getEnd() {
 
 		return Integer.toHexString(ByteUtils.byteArray2Int(this.prototype.end));
+	}
+
+	/**
+	 * 转为字节数组
+	 * 
+	 * @return
+	 */
+	public byte[] toByteArray() {
+
+		return this.prototype.toByteArray();
 	}
 
 	@Override
@@ -456,6 +629,42 @@ public class Datagram {
 
 				return false;
 			}
+		}
+
+		/**
+		 * 转为字节数组
+		 * 
+		 * @return
+		 */
+		public byte[] toByteArray() {
+
+			byte[] byteArray = new byte[this.begin.length + this.address.length + this.controlCode.length
+					+ this.length.length + this.data.length + this.checkCode.length + this.end.length];
+
+			int index = 0;
+
+			System.arraycopy(this.begin, 0, byteArray, index, this.begin.length);
+			index += this.begin.length;
+
+			System.arraycopy(this.address, 0, byteArray, index, this.address.length);
+			index += this.address.length;
+
+			System.arraycopy(this.controlCode, 0, byteArray, index, this.controlCode.length);
+			index += this.controlCode.length;
+
+			System.arraycopy(this.length, 0, byteArray, index, this.length.length);
+			index += this.length.length;
+
+			System.arraycopy(this.data, 0, byteArray, index, this.data.length);
+			index += this.data.length;
+
+			System.arraycopy(this.checkCode, 0, byteArray, index, this.checkCode.length);
+			index += this.checkCode.length;
+
+			System.arraycopy(this.end, 0, byteArray, index, this.end.length);
+			index += this.end.length;
+
+			return byteArray;
 		}
 	}
 

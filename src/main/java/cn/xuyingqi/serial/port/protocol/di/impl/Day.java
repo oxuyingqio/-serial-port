@@ -1,25 +1,20 @@
-package cn.xuyingqi.serial.port.protocol.di;
+package cn.xuyingqi.serial.port.protocol.di.impl;
 
-import java.text.SimpleDateFormat;
-
+import cn.xuyingqi.serial.port.protocol.di.Di;
 import cn.xuyingqi.util.util.ByteUtils;
 
 /**
- * DI
+ * 日期
  * 
  * @author XuYQ
  *
  */
-public abstract class Di {
+public class Day extends Di {
 
 	/**
-	 * 日期格式化
+	 * 默认DI值
 	 */
-	protected static final SimpleDateFormat DATE_SDF = new SimpleDateFormat("yyyy-MM-dd");
-	/**
-	 * 日期时间格式化
-	 */
-	protected static final SimpleDateFormat DATETIME_SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static final byte DI = 0x52;
 
 	/**
 	 * 原型
@@ -27,9 +22,9 @@ public abstract class Di {
 	private Prototype prototype;
 
 	/**
-	 * DI
+	 * 日期
 	 */
-	public Di() {
+	public Day() {
 
 		this.prototype = new Prototype();
 	}
@@ -43,19 +38,28 @@ public abstract class Di {
 	 *            数据索引值
 	 * @return
 	 */
+	@Override
 	public int fill(byte[] data, int index) {
+
+		index = super.fill(data, index);
 
 		return this.prototype.fill(data, index);
 	}
 
+	@Override
+	public String getDi() {
+
+		return "日期";
+	}
+
 	/**
-	 * 获取DI
+	 * 获取日期
 	 * 
 	 * @return
 	 */
-	public String getDi() {
+	public Short getDay() {
 
-		return Integer.toHexString(ByteUtils.byteArray2Int(this.prototype.di));
+		return ByteUtils.byteArray2Short(this.prototype.day);
 	}
 
 	@Override
@@ -63,13 +67,15 @@ public abstract class Di {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("		DI：");
-		sb.append(this.getDi());
+		sb.append(super.toString());
+
+		sb.append("		日期：");
+		sb.append(this.getDay());
 		sb.append(" [");
-		for (int i = 0, length = this.prototype.di.length; i < length; i++) {
+		for (int i = 0, length = this.prototype.day.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.di[i])));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.day[i])));
 		}
 		sb.append("]");
 
@@ -85,14 +91,14 @@ public abstract class Di {
 	private class Prototype {
 
 		/**
-		 * DI默认长度
+		 * 日期默认长度
 		 */
-		private static final int DI_LENGTH = 1;
+		private static final int DAY_LENGTH = 1;
 
 		/**
-		 * DI
+		 * 日期
 		 */
-		private byte[] di = new byte[DI_LENGTH];
+		private byte[] day = new byte[DAY_LENGTH];
 
 		/**
 		 * 填充数据
@@ -103,8 +109,8 @@ public abstract class Di {
 		 */
 		public int fill(byte[] data, int index) {
 
-			System.arraycopy(data, index, this.di, 0, this.di.length);
-			index += this.di.length;
+			System.arraycopy(data, index, this.day, 0, this.day.length);
+			index += this.day.length;
 
 			return index;
 		}
