@@ -308,7 +308,7 @@ public class Datagram {
 					case ValveValue.DI:
 						di = new ValveValue();
 						break;
-						
+
 					case NetworkingConfirm.DI:
 						di = new NetworkingConfirm();
 						break;
