@@ -52,8 +52,11 @@ public class SerialPortUtil {
 	 * 打开串口
 	 * 
 	 * @param commPortName
+	 *            端口名称
 	 * @param baudRate
+	 *            波特率
 	 * @param timeout
+	 *            超时时间
 	 * @return
 	 */
 	public static final SerialPort openSerialPort(String commPortName, int baudRate, int timeout) {

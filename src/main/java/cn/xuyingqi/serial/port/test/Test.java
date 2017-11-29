@@ -134,11 +134,25 @@ public class Test {
 		SerialPort serialPort = SerialPortUtil.openSerialPort(commPorts.get(0), 1200, 10);
 		System.out.println("串口" + serialPort + "已打开");
 
+		// 新开线程接收报文
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				System.out.println("开始接收报文==========================================");
+
+				new Test(serialPort).deal();
+			}
+		}).start();
+
 		// 新开线程发送报文
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
+
+				System.out.println("开始发送报文=========================================================");
 
 				StringBuffer sb = new StringBuffer();
 				sb.append("68 71 9F 08 01 02 0F 4B 03 0A 00 00 00 01 02 E1 07 0A 1E 0B 2D 2A 5F 16");
@@ -195,24 +209,15 @@ public class Test {
 				sb.append("68 71 9F 08 01 02 10 2B 07 64 00 02 00 C8 00 04 00 2C 01 71 23 51 00 09 16");
 				sb.append("68 70 9F 08 01 01 03 49 52 16 35 16  ");
 				sb.append("68 71 9F 08 01 01 03 49 52 64 84 16 ");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
-				sb.append("");
 
 				String temp = sb.toString().replace(" ", "");
-				SerialPortUtil.sendToPort(serialPort, ByteUtils.doubleHexString2ByteArray(temp));
+				System.out.println(temp);
+				if (serialPort != null) {
+
+					SerialPortUtil.sendToPort(serialPort, ByteUtils.doubleHexString2ByteArray(temp));
+				}
 			}
 		}).start();
-
-		new Test(serialPort).deal();
 
 		System.out.println("应该来不了");
 		serialPort.close();

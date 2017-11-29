@@ -1,11 +1,16 @@
 package cn.xuyingqi.serial.port.gui;
 
 import java.awt.BorderLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+
+import cn.xuyingqi.serial.port.model.Observer;
+import cn.xuyingqi.serial.port.model.Subject;
 
 /**
  * 接收面板
@@ -13,12 +18,17 @@ import javax.swing.border.TitledBorder;
  * @author XuYQ
  *
  */
-public class Receive extends JPanel {
+public class Receive extends JPanel implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 多行文本框
+	 */
+	private JTextArea jTextArea;
 
 	/**
 	 * 接收面板
@@ -27,6 +37,9 @@ public class Receive extends JPanel {
 
 		// 初始化
 		this.init();
+
+		// 注册观察者
+		Subject.getInstance().addObserver(this);
 	}
 
 	/**
@@ -52,7 +65,19 @@ public class Receive extends JPanel {
 		// 设置布局
 		this.setLayout(new BorderLayout());
 
+		// 实例化多行文本框
+		this.jTextArea = new JTextArea();
 		// 添加多行文本输入框
-		this.add(new JScrollPane(new JTextArea()), BorderLayout.CENTER);
+		this.add(new JScrollPane(this.jTextArea), BorderLayout.CENTER);
+	}
+
+	@Override
+	public void notify(String msg) {
+
+		this.jTextArea.append("[");
+		this.jTextArea.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		this.jTextArea.append("] ");
+		this.jTextArea.append(msg);
+		this.jTextArea.append("\n");
 	}
 }
