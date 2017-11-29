@@ -109,7 +109,7 @@ public class MeterOperationParamValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		闲置天数：");
+		sb.append("闲置天数：");
 		sb.append(this.getIdleDays());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.idleDays.length; i < length; i++) {
@@ -117,9 +117,9 @@ public class MeterOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.idleDays[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		通讯失败次数：");
+		sb.append("通讯失败次数：");
 		sb.append(this.getCommunicationFailureTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.communicationFailureTime.length; i < length; i++) {
@@ -127,9 +127,9 @@ public class MeterOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.communicationFailureTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		超长使用时间：");
+		sb.append("超长使用时间：");
 		sb.append(this.getLongUseTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.longUseTime.length; i < length; i++) {
@@ -137,9 +137,9 @@ public class MeterOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.longUseTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		大流量检测：");
+		sb.append("大流量检测：");
 		sb.append(this.getLargeFlow());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.largeFlow.length; i < length; i++) {
@@ -147,9 +147,9 @@ public class MeterOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.largeFlow[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		小流量检测：");
+		sb.append("小流量检测：");
 		sb.append(this.getSmallFlow());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.smallFlow.length; i < length; i++) {
@@ -157,7 +157,7 @@ public class MeterOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.smallFlow[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

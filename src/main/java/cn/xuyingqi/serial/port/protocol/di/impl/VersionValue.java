@@ -79,7 +79,7 @@ public class VersionValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		硬件版本：");
+		sb.append("硬件版本：");
 		sb.append(this.getHardwareVersion());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.hardwareVersion.length; i < length; i++) {
@@ -87,9 +87,9 @@ public class VersionValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.hardwareVersion[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		软件版本：");
+		sb.append("软件版本：");
 		sb.append(this.getSoftwareVersion());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.softwareVersion.length; i < length; i++) {
@@ -97,7 +97,7 @@ public class VersionValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.softwareVersion[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

@@ -172,7 +172,7 @@ public class MeterAttributeValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		频率：");
+		sb.append("频率：");
 		sb.append(this.getRate());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.rate.length; i < length; i++) {
@@ -180,9 +180,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.rate[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		带宽：");
+		sb.append("带宽：");
 		sb.append(this.getBandwidth());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.bandwidth.length; i < length; i++) {
@@ -190,9 +190,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.bandwidth[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		扩频码：");
+		sb.append("扩频码：");
 		sb.append(this.getSpreadingCode());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.spreadingCode.length; i < length; i++) {
@@ -200,9 +200,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.spreadingCode[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		编码率：");
+		sb.append("编码率：");
 		sb.append(this.getCodingRate());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.codingRate.length; i < length; i++) {
@@ -210,9 +210,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.codingRate[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		功率：");
+		sb.append("功率：");
 		sb.append(this.getPower());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.power.length; i < length; i++) {
@@ -220,9 +220,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.power[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		主动上报开始时间：");
+		sb.append("主动上报开始时间：");
 		sb.append(this.getStartTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.startTime.length; i < length; i++) {
@@ -230,9 +230,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.startTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		主动上报结束时间：");
+		sb.append("主动上报结束时间：");
 		sb.append(this.getEndTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.endTime.length; i < length; i++) {
@@ -240,9 +240,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.endTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		组序号：");
+		sb.append("组序号：");
 		sb.append(this.getGroupSerialNumber());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.groupSerialNumber.length; i < length; i++) {
@@ -250,9 +250,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.groupSerialNumber[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		测量点号：");
+		sb.append("测量点号：");
 		sb.append(this.getMeasuringPoint());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.measuringPoint.length; i < length; i++) {
@@ -260,9 +260,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.measuringPoint[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		表地址：");
+		sb.append("表地址：");
 		sb.append(this.getMeterAddress());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.meterAddress.length; i < length; i++) {
@@ -270,9 +270,9 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meterAddress[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		是否被管理：");
+		sb.append("是否被管理：");
 		sb.append(this.getManaged());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.managed.length; i < length; i++) {
@@ -280,7 +280,7 @@ public class MeterAttributeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.managed[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

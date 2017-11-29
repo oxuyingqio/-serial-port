@@ -69,7 +69,7 @@ public class DeleteMeasuringPointValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		测量点号：");
+		sb.append("测量点号：");
 		sb.append(this.getMeasuringPoint());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.measuringPoint.length; i < length; i++) {
@@ -77,7 +77,7 @@ public class DeleteMeasuringPointValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.measuringPoint[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

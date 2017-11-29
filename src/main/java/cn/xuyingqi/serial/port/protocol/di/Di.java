@@ -63,7 +63,7 @@ public abstract class Di {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("		DI：");
+		sb.append("DI：");
 		sb.append(this.getDi());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.di.length; i < length; i++) {
@@ -71,7 +71,7 @@ public abstract class Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.di[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

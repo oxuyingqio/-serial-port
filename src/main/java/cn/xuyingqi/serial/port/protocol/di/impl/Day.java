@@ -69,7 +69,7 @@ public class Day extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		日期：");
+		sb.append("日期：");
 		sb.append(this.getDay());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.day.length; i < length; i++) {
@@ -77,7 +77,7 @@ public class Day extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.day[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

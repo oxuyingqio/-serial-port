@@ -69,7 +69,7 @@ public class MeterAddressValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		表地址：");
+		sb.append("表地址：");
 		sb.append(this.getMeterAddress());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.meterAddress.length; i < length; i++) {
@@ -77,7 +77,7 @@ public class MeterAddressValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meterAddress[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

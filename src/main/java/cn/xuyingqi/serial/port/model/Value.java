@@ -3,17 +3,17 @@ package cn.xuyingqi.serial.port.model;
 import gnu.io.SerialPort;
 
 /**
- * 当前
+ * 值
  * 
  * @author XuYQ
  *
  */
-public class Current {
+public class Value {
 
 	/**
-	 * 当前
+	 * 值
 	 */
-	private static Current current;
+	private static Value current;
 
 	/**
 	 * 波特率集合
@@ -37,23 +37,23 @@ public class Current {
 	 * 
 	 * @return
 	 */
-	private Current() {
+	private Value() {
 
 		this.baudRates = new int[] { 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 56000, 57600, 115200 };
-		this.lastBaudRate = 1200;
+		this.lastBaudRate = 9600;
 		this.timeout = 10;
 	}
 
 	/**
-	 * 获取当前实例
+	 * 获取值实例
 	 * 
 	 * @return
 	 */
-	public static final synchronized Current getInstance() {
+	public static final synchronized Value getInstance() {
 
 		if (current == null) {
 
-			current = new Current();
+			current = new Value();
 		}
 
 		return current;

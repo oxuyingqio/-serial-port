@@ -1,5 +1,6 @@
 package cn.xuyingqi.serial.port.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,9 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import cn.xuyingqi.serial.port.model.Current;
 import cn.xuyingqi.serial.port.model.SerialPortDeal;
 import cn.xuyingqi.serial.port.model.Subject;
+import cn.xuyingqi.serial.port.model.Value;
 import cn.xuyingqi.serial.port.util.SerialPortUtil;
 import gnu.io.SerialPort;
 
@@ -81,12 +82,12 @@ public class Config extends JPanel {
 		// 实例化下拉列表选择框
 		JComboBox<Integer> jcb2 = new JComboBox<Integer>();
 		// 遍历波特率集合
-		for (int i = 0; i < Current.getInstance().getBaudRates().length; i++) {
+		for (int i = 0; i < Value.getInstance().getBaudRates().length; i++) {
 
-			jcb2.addItem(Current.getInstance().getBaudRates()[i]);
+			jcb2.addItem(Value.getInstance().getBaudRates()[i]);
 		}
 		// 设置默认值
-		jcb2.setSelectedItem(Current.getInstance().getLastBaudRate());
+		jcb2.setSelectedItem(Value.getInstance().getLastBaudRate());
 		// 添加事件
 		jcb2.addActionListener(new ActionListener() {
 
@@ -97,12 +98,20 @@ public class Config extends JPanel {
 				if (e.getSource() == jcb2) {
 
 					// 记录当前值
-					Current.getInstance().setLastBaudRate((int) jcb2.getSelectedItem());
+					Value.getInstance().setLastBaudRate((int) jcb2.getSelectedItem());
 				}
 			}
 		});
 		// 添加下拉列表选择框
 		this.add(jcb2);
+
+		// 串口状态
+		this.add(new JLabel("串口状态："));
+		// 实例化标签
+		JLabel jLabel = new JLabel("关");
+		jLabel.setForeground(Color.RED);
+		// 添加标签
+		this.add(jLabel);
 
 		// 打开串口
 		JButton jb1 = new JButton("打开串口");
@@ -123,13 +132,13 @@ public class Config extends JPanel {
 
 						// 打开串口
 						SerialPort serialPort = SerialPortUtil.openSerialPort(commPortName, baudRate,
-								Current.getInstance().getTimeout());
+								Value.getInstance().getTimeout());
 
-						// 通知
-						Subject.getInstance().notifyObservers("串口已打开");
+						jLabel.setText("开");
+						jLabel.setForeground(Color.BLUE);
 
 						// 设置串口
-						Current.getInstance().setSerialPort(serialPort);
+						Value.getInstance().setSerialPort(serialPort);
 						// 新起线程监听端口信息
 						new Thread(new Runnable() {
 
@@ -167,10 +176,10 @@ public class Config extends JPanel {
 
 				if (e.getSource() == jb2) {
 
-					if (Current.getInstance().getSerialPort() != null) {
+					if (Value.getInstance().getSerialPort() != null) {
 
-						SerialPortUtil.closeSerialPort(Current.getInstance().getSerialPort());
-						Current.getInstance().setSerialPort(null);
+						SerialPortUtil.closeSerialPort(Value.getInstance().getSerialPort());
+						Value.getInstance().setSerialPort(null);
 					}
 
 					// 通知
@@ -178,11 +187,11 @@ public class Config extends JPanel {
 				}
 			}
 		});
-//		// 添加关闭串口
-//		this.add(jb2);
+		// // 添加关闭串口
+		// this.add(jb2);
 
 		// 添加标签,占格用
-		for (int i = 0; i < (12 * 2 - 6); i++) {
+		for (int i = 0; i < (12 * 2 - 8); i++) {
 
 			// 添加标签
 			this.add(new JLabel(""));

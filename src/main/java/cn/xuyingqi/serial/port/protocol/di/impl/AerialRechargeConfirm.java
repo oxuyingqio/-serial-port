@@ -1,7 +1,6 @@
 package cn.xuyingqi.serial.port.protocol.di.impl;
 
 import cn.xuyingqi.serial.port.protocol.di.Di;
-import cn.xuyingqi.serial.port.protocol.model.RechargeType;
 import cn.xuyingqi.util.util.ByteUtils;
 
 /**
@@ -78,9 +77,19 @@ public class AerialRechargeConfirm extends Di {
 	 * 
 	 * @return
 	 */
-	public RechargeType getRechargeTime() {
+	public Short getRechargeTime() {
 
-		return RechargeType.codeOf(ByteUtils.byteArray2Short(this.prototype.rechargeTime));
+		return ByteUtils.byteArray2Short(this.prototype.rechargeTime);
+	}
+
+	/**
+	 * 获取错误代码
+	 * 
+	 * @return
+	 */
+	public Short getErrorCode() {
+
+		return ByteUtils.byteArray2Short(this.prototype.errorCode);
 	}
 
 	/**
@@ -110,7 +119,7 @@ public class AerialRechargeConfirm extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		序号：");
+		sb.append("序号：");
 		sb.append(this.getSerialNumber());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.serialNumber.length; i < length; i++) {
@@ -118,9 +127,9 @@ public class AerialRechargeConfirm extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.serialNumber[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		随机数：");
+		sb.append("随机数：");
 		sb.append(this.getRandom());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.random.length; i < length; i++) {
@@ -128,19 +137,29 @@ public class AerialRechargeConfirm extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.random[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		充值次数：");
-		sb.append(this.getRechargeTime().getDesc());
+		sb.append("充值次数：");
+		sb.append(this.getRechargeTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.rechargeTime.length; i < length; i++) {
 
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.rechargeTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		总充值量：");
+		sb.append("错误代码：");
+		sb.append(this.getErrorCode());
+		sb.append(" [");
+		for (int i = 0, length = this.prototype.errorCode.length; i < length; i++) {
+
+			sb.append(" ");
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.errorCode[i])));
+		}
+		sb.append("] # ");
+
+		sb.append("总充值量：");
 		sb.append(this.getTotalRechargeData());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.totalRechargeData.length; i < length; i++) {
@@ -148,9 +167,9 @@ public class AerialRechargeConfirm extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.totalRechargeData[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		剩余量：");
+		sb.append("剩余量：");
 		sb.append(this.getResidualQuantity());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.residualQuantity.length; i < length; i++) {
@@ -158,7 +177,7 @@ public class AerialRechargeConfirm extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.residualQuantity[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}
@@ -184,6 +203,10 @@ public class AerialRechargeConfirm extends Di {
 		 */
 		private static final int RECHARGE_TIME_LENGTH = 1;
 		/**
+		 * 错误代码默认长度
+		 */
+		private static final int ERROR_CODE_LENGTH = 1;
+		/**
 		 * 总充值量默认长度
 		 */
 		private static final int TOTAL_RECHARGE_DATA_LENGTH = 4;
@@ -204,6 +227,10 @@ public class AerialRechargeConfirm extends Di {
 		 * 充值次数
 		 */
 		private byte[] rechargeTime = new byte[RECHARGE_TIME_LENGTH];
+		/**
+		 * 错误代码
+		 */
+		private byte[] errorCode = new byte[ERROR_CODE_LENGTH];
 		/**
 		 * 充值量
 		 */
@@ -230,6 +257,9 @@ public class AerialRechargeConfirm extends Di {
 
 			System.arraycopy(data, index, this.rechargeTime, 0, this.rechargeTime.length);
 			index += this.rechargeTime.length;
+
+			System.arraycopy(data, index, this.errorCode, 0, this.errorCode.length);
+			index += this.errorCode.length;
 
 			System.arraycopy(data, index, this.totalRechargeData, 0, this.totalRechargeData.length);
 			index += this.totalRechargeData.length;

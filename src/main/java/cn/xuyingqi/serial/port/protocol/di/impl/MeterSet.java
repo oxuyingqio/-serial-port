@@ -129,7 +129,7 @@ public class MeterSet extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		表总数：");
+		sb.append("表总数：");
 		sb.append(this.getTotal());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.total.length; i < length; i++) {
@@ -137,9 +137,9 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.total[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		组数：");
+		sb.append("组数：");
 		sb.append(this.getGroupSize());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.groupSize.length; i < length; i++) {
@@ -147,9 +147,9 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.groupSize[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		组：");
+		sb.append("组：");
 		sb.append(this.getGroup());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.group.length; i < length; i++) {
@@ -157,9 +157,9 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.group[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		表1：");
+		sb.append("表1：");
 		sb.append(this.getMeter1());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.meter1.length; i < length; i++) {
@@ -167,9 +167,9 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meter1[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		表2：");
+		sb.append("表2：");
 		sb.append(this.getMeter2());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.meter2.length; i < length; i++) {
@@ -177,9 +177,9 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meter2[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		表3：");
+		sb.append("表3：");
 		sb.append(this.getMeter3());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.meter3.length; i < length; i++) {
@@ -187,9 +187,9 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meter3[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		表4：");
+		sb.append("表4：");
 		sb.append(this.getMeter4());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.meter4.length; i < length; i++) {
@@ -197,7 +197,7 @@ public class MeterSet extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.meter4[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

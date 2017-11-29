@@ -57,9 +57,9 @@ public class NetworkingValue extends Di {
 	 * 
 	 * @return
 	 */
-	public Short getGasConsumption() {
+	public Long getGasConsumption() {
 
-		return ByteUtils.byteArray2Short(this.prototype.gasConsumption);
+		return ByteUtils.byteArray2Long(ByteUtils.reverse(this.prototype.gasConsumption));
 	}
 
 	/**
@@ -67,29 +67,29 @@ public class NetworkingValue extends Di {
 	 * 
 	 * @return
 	 */
-	public Short getRunningState() {
+	public Integer getRunningState() {
 
-		return ByteUtils.byteArray2Short(this.prototype.runningState);
+		return ByteUtils.byteArray2Int(ByteUtils.reverse(this.prototype.runningState));
 	}
 
 	/**
-	 * 获取硬件版本
+	 * 获取干电池电压
 	 * 
 	 * @return
 	 */
-	public Short getHardwareVersion() {
+	public Short getDryCellVoltage() {
 
-		return ByteUtils.byteArray2Short(this.prototype.hardwareVersion);
+		return ByteUtils.byteArray2Short(this.prototype.dryCellVoltage);
 	}
 
 	/**
-	 * 获取软件版本
+	 * 获取锂电池电压
 	 * 
 	 * @return
 	 */
-	public Short getSoftwareVersion() {
+	public Short getLithiumBatteryVoltage() {
 
-		return ByteUtils.byteArray2Short(this.prototype.softwareVersion);
+		return ByteUtils.byteArray2Short(this.prototype.lithiumBatteryVoltage);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class NetworkingValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		累积用气量：");
+		sb.append("累积用气量：");
 		sb.append(this.getGasConsumption());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.gasConsumption.length; i < length; i++) {
@@ -107,9 +107,9 @@ public class NetworkingValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.gasConsumption[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		运行状态：");
+		sb.append("运行状态：");
 		sb.append(this.getRunningState());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.runningState.length; i < length; i++) {
@@ -117,27 +117,27 @@ public class NetworkingValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.runningState[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		硬件版本：");
-		sb.append(this.getHardwareVersion());
+		sb.append("干电池电压：");
+		sb.append(this.getDryCellVoltage());
 		sb.append(" [");
-		for (int i = 0, length = this.prototype.hardwareVersion.length; i < length; i++) {
+		for (int i = 0, length = this.prototype.dryCellVoltage.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.hardwareVersion[i])));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.dryCellVoltage[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		软件版本：");
-		sb.append(this.getSoftwareVersion());
+		sb.append("锂电池电压：");
+		sb.append(this.getLithiumBatteryVoltage());
 		sb.append(" [");
-		for (int i = 0, length = this.prototype.softwareVersion.length; i < length; i++) {
+		for (int i = 0, length = this.prototype.lithiumBatteryVoltage.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.softwareVersion[i])));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.lithiumBatteryVoltage[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}
@@ -153,19 +153,19 @@ public class NetworkingValue extends Di {
 		/**
 		 * 累积用气量默认长度
 		 */
-		private static final int GAS_CONSUMPTION_LENGTH = 1;
+		private static final int GAS_CONSUMPTION_LENGTH = 4;
 		/**
 		 * 运行状态默认长度
 		 */
-		private static final int RUNNING_STATE_LENGTH = 1;
+		private static final int RUNNING_STATE_LENGTH = 2;
 		/**
-		 * 硬件版本默认长度
+		 * 干电池电压默认长度
 		 */
-		private static final int HARDWARE_VERSION_LENGTH = 1;
+		private static final int DRY_CELL_VOLTAGE_LENGTH = 1;
 		/**
-		 * 软件版本默认长度
+		 * 锂电池电压默认长度
 		 */
-		private static final int SOFTWARE_VERSION_LENGTH = 1;
+		private static final int LITHIUM_BATTERY_VOLTAGE_LENGTH = 1;
 
 		/**
 		 * 累积用气量
@@ -176,13 +176,13 @@ public class NetworkingValue extends Di {
 		 */
 		private byte[] runningState = new byte[RUNNING_STATE_LENGTH];
 		/**
-		 * 硬件版本
+		 * 干电池电压
 		 */
-		private byte[] hardwareVersion = new byte[HARDWARE_VERSION_LENGTH];
+		private byte[] dryCellVoltage = new byte[DRY_CELL_VOLTAGE_LENGTH];
 		/**
-		 * 软件版本
+		 * 锂电池电压
 		 */
-		private byte[] softwareVersion = new byte[SOFTWARE_VERSION_LENGTH];
+		private byte[] lithiumBatteryVoltage = new byte[LITHIUM_BATTERY_VOLTAGE_LENGTH];
 
 		/**
 		 * 填充数据
@@ -199,11 +199,11 @@ public class NetworkingValue extends Di {
 			System.arraycopy(data, index, this.runningState, 0, this.runningState.length);
 			index += this.runningState.length;
 
-			System.arraycopy(data, index, this.hardwareVersion, 0, this.hardwareVersion.length);
-			index += this.hardwareVersion.length;
+			System.arraycopy(data, index, this.dryCellVoltage, 0, this.dryCellVoltage.length);
+			index += this.dryCellVoltage.length;
 
-			System.arraycopy(data, index, this.softwareVersion, 0, this.softwareVersion.length);
-			index += this.softwareVersion.length;
+			System.arraycopy(data, index, this.lithiumBatteryVoltage, 0, this.lithiumBatteryVoltage.length);
+			index += this.lithiumBatteryVoltage.length;
 
 			return index;
 		}

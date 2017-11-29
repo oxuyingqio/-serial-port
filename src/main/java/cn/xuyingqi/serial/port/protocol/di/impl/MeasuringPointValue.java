@@ -79,7 +79,7 @@ public class MeasuringPointValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		组序号：");
+		sb.append("组序号：");
 		sb.append(this.getGroupSerialNumber());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.groupSerialNumber.length; i < length; i++) {
@@ -87,9 +87,9 @@ public class MeasuringPointValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.groupSerialNumber[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		测量点号：");
+		sb.append("测量点号：");
 		sb.append(this.getMeasuringPoint());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.measuringPoint.length; i < length; i++) {
@@ -97,7 +97,7 @@ public class MeasuringPointValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.measuringPoint[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

@@ -81,7 +81,7 @@ public class WakeUpTimeValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		唤醒开始时间：");
+		sb.append("唤醒开始时间：");
 		sb.append(this.getStartTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.startTime.length; i < length; i++) {
@@ -89,9 +89,9 @@ public class WakeUpTimeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.startTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		唤醒结束时间：");
+		sb.append("唤醒结束时间：");
 		sb.append(this.getEndTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.endTime.length; i < length; i++) {
@@ -99,7 +99,7 @@ public class WakeUpTimeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.endTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

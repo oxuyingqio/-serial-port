@@ -160,7 +160,7 @@ public class SettlementSchemeValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		序号：");
+		sb.append("序号：");
 		sb.append(this.getSerialNumber());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.serialNumber.length; i < length; i++) {
@@ -168,9 +168,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.serialNumber[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		单价1：");
+		sb.append("单价1：");
 		sb.append(this.getPrice1());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.price1.length; i < length; i++) {
@@ -178,9 +178,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.price1[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		气量1：");
+		sb.append("气量1：");
 		sb.append(this.getVolume1());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.volume1.length; i < length; i++) {
@@ -188,9 +188,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.volume1[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		单价2：");
+		sb.append("单价2：");
 		sb.append(this.getPrice2());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.price2.length; i < length; i++) {
@@ -198,9 +198,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.price2[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		气量2：");
+		sb.append("气量2：");
 		sb.append(this.getVolume2());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.volume2.length; i < length; i++) {
@@ -208,9 +208,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.volume2[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		单价3：");
+		sb.append("单价3：");
 		sb.append(this.getPrice3());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.price3.length; i < length; i++) {
@@ -218,9 +218,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.price3[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		调价执行日期：");
+		sb.append("调价执行日期：");
 		sb.append(DATE_SDF.format(this.getDate()));
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.date.length; i < length; i++) {
@@ -228,9 +228,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.date[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		结算周期起始月份：");
+		sb.append("结算周期起始月份：");
 		sb.append(this.getMonth());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.month.length; i < length; i++) {
@@ -238,9 +238,9 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.month[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		调价标识：");
+		sb.append("调价标识：");
 		sb.append(this.getFlag());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.flag.length; i < length; i++) {
@@ -248,7 +248,7 @@ public class SettlementSchemeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.flag[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

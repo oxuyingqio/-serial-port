@@ -125,7 +125,7 @@ public class AerialRechargeValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		序号：");
+		sb.append("序号：");
 		sb.append(this.getSerialNumber());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.serialNumber.length; i < length; i++) {
@@ -133,9 +133,9 @@ public class AerialRechargeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.serialNumber[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		充值量：");
+		sb.append("充值量：");
 		sb.append(this.getRechargeData());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.rechargeData.length; i < length; i++) {
@@ -143,9 +143,9 @@ public class AerialRechargeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.rechargeData[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		充值类型：");
+		sb.append("充值类型：");
 		sb.append(this.getRechargeType().getDesc());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.rechargeType.length; i < length; i++) {
@@ -153,9 +153,9 @@ public class AerialRechargeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.rechargeType[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		随机数：");
+		sb.append("随机数：");
 		sb.append(this.getRandom());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.random.length; i < length; i++) {
@@ -163,9 +163,9 @@ public class AerialRechargeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.random[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		日期时间：");
+		sb.append("日期时间：");
 		sb.append(DATETIME_SDF.format(this.getDateTime()));
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.dateTime.length; i < length; i++) {
@@ -173,7 +173,7 @@ public class AerialRechargeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.dateTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

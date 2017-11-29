@@ -119,7 +119,7 @@ public class MeteringOperationParamValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		付费类型：");
+		sb.append("付费类型：");
 		sb.append(this.getPaymentType());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.paymentType.length; i < length; i++) {
@@ -127,9 +127,9 @@ public class MeteringOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.paymentType[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		最大累加气量：");
+		sb.append("最大累加气量：");
 		sb.append(this.getMaxValue());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.maxValue.length; i < length; i++) {
@@ -137,9 +137,9 @@ public class MeteringOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.maxValue[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		最小方提示：");
+		sb.append("最小方提示：");
 		sb.append(this.getMinValue());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.minValue.length; i < length; i++) {
@@ -147,9 +147,9 @@ public class MeteringOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.minValue[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		关阀气量：");
+		sb.append("关阀气量：");
 		sb.append(this.getCloseValue());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.closeValue.length; i < length; i++) {
@@ -157,9 +157,9 @@ public class MeteringOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.closeValue[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		单价：");
+		sb.append("单价：");
 		sb.append(this.getPrice());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.price.length; i < length; i++) {
@@ -167,9 +167,9 @@ public class MeteringOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.price[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		结算类型：");
+		sb.append("结算类型：");
 		sb.append(this.getSettlementType());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.settlementType.length; i < length; i++) {
@@ -177,7 +177,7 @@ public class MeteringOperationParamValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.settlementType[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

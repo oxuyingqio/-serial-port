@@ -69,7 +69,7 @@ public class ValveValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		控制：");
+		sb.append("控制：");
 		sb.append(this.getControl());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.control.length; i < length; i++) {
@@ -77,7 +77,7 @@ public class ValveValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.control[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

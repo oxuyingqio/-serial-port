@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-import cn.xuyingqi.serial.port.model.Current;
+import cn.xuyingqi.serial.port.model.Value;
 import cn.xuyingqi.serial.port.model.Subject;
 import cn.xuyingqi.serial.port.util.SerialPortUtil;
 import cn.xuyingqi.util.util.ByteUtils;
@@ -80,11 +80,11 @@ public class Send extends JPanel {
 						@Override
 						public void run() {
 
-							if (Current.getInstance().getSerialPort() != null) {
+							if (Value.getInstance().getSerialPort() != null) {
 
 								try {
 
-									SerialPortUtil.sendToPort(Current.getInstance().getSerialPort(),
+									SerialPortUtil.sendToPort(Value.getInstance().getSerialPort(),
 											ByteUtils.doubleHexString2ByteArray(jta.getText().trim().replace(" ", "")));
 
 									jta.setText("");

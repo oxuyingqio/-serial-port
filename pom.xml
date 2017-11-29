@@ -22,13 +22,14 @@
 		<maven-compiler-plugin.version>3.5</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
 	</properties>
 
 	<!-- 依赖包 -->
 	<dependencies>
 		<dependency>
 			<groupId>cn.xuyingqi</groupId>
-			<artifactId>JNA</artifactId>
+			<artifactId>util</artifactId>
 			<version>${xuyingqi.version}</version>
 			<classifier>java</classifier>
 		</dependency>
@@ -93,9 +94,6 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-			<resource>
-				<directory>dll</directory>
-			</resource>
 		</resources>
 
 		<!-- 插件 -->
@@ -148,7 +146,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.5.5</version>
+				<version>${maven-assembly-plugin.version}</version>
 				<configuration>
 					<archive>
 						<manifest>

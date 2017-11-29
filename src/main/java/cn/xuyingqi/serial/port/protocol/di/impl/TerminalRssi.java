@@ -89,7 +89,7 @@ public class TerminalRssi extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		集中器/中继器地址：");
+		sb.append("集中器/中继器地址：");
 		sb.append(this.getManageAddress());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.manageAddress.length; i < length; i++) {
@@ -97,9 +97,9 @@ public class TerminalRssi extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.manageAddress[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		信号强度绝对值：");
+		sb.append("信号强度绝对值：");
 		sb.append(this.getTheorySignal());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.theorySignal.length; i < length; i++) {
@@ -107,9 +107,9 @@ public class TerminalRssi extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.theorySignal[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		信号强度：");
+		sb.append("信号强度：");
 		sb.append(this.getActualSignal());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.actualSignal.length; i < length; i++) {
@@ -117,7 +117,7 @@ public class TerminalRssi extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.actualSignal[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

@@ -205,7 +205,9 @@ public class Datagram {
 				if ((this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
 						&& this.getFunction() == Function.WRITE)
 						|| (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
-								&& this.getFunction() == Function.READ)) {
+								&& this.getFunction() == Function.READ)
+						|| (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
+								&& this.getFunction() == Function.REPORT)) {
 
 					switch (diValue) {
 					case TimingValue.DI:
@@ -375,7 +377,7 @@ public class Datagram {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("	开始：");
+		sb.append("开始：");
 		sb.append(this.getBegin());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.begin.length; i < length; i++) {
@@ -383,9 +385,9 @@ public class Datagram {
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.begin[i])));
 			sb.append(" ");
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("	地址：");
+		sb.append("地址：");
 		sb.append(this.getAddress());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.address.length; i < length; i++) {
@@ -393,13 +395,13 @@ public class Datagram {
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.address[i])));
 			sb.append(" ");
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("	传输方向：");
+		sb.append("传输方向：");
 		sb.append(this.getTransmissionDirection().getDesc());
-		sb.append("	通讯状态：");
+		sb.append(" # 通讯状态：");
 		sb.append(this.getCommunicationState().getDesc());
-		sb.append("	功能定义：");
+		sb.append(" # 功能定义：");
 		sb.append(this.getFunction().getDesc());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.controlCode.length; i < length; i++) {
@@ -407,9 +409,9 @@ public class Datagram {
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.controlCode[i])));
 			sb.append(" ");
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("	长度：");
+		sb.append("长度：");
 		sb.append(this.getLength());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.length.length; i < length; i++) {
@@ -417,32 +419,32 @@ public class Datagram {
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.length[i])));
 			sb.append(" ");
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("	数据域：");
+		sb.append("数据域：");
 		List<Di> dis = this.getData();
 		for (int i = 0, length = dis.size(); i < length; i++) {
 
 			sb.append(dis.get(i));
 		}
 
-		sb.append("	校验码：");
+		sb.append("校验码：");
 		sb.append(this.getCheckCode());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.checkCode.length; i < length; i++) {
 
-			sb.append(Integer.toHexString(this.prototype.checkCode[i]));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.checkCode[i])));
 			sb.append(" ");
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("	结束：");
+		sb.append("结束：");
 		sb.append(this.getEnd());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.end.length; i < length; i++) {
 
 			sb.append(" ");
-			sb.append(Integer.toHexString(this.prototype.end[i]));
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.end[i])));
 		}
 		sb.append("]");
 
@@ -675,10 +677,14 @@ public class Datagram {
 	 */
 	public static void main(String[] args) {
 
-		short a = 0xFF;
-		short b = 0x80;
-		int c = (a & b);
+		String str = "68 70 9f 08 01 81 0d 49 13 01 00 00 00 00 35 21 e1 07 0b 1d d1 16 ";
+		byte[] temp = ByteUtils.doubleHexString2ByteArray(str.replace(" ", ""));
 
-		System.out.println(Integer.toHexString(c));
+		Datagram datagram = Datagram.newInstance((byte) 0x68);
+		for (byte b : temp) {
+			datagram.fill(b);
+		}
+
+		System.out.println(datagram);
 	}
 }

@@ -80,7 +80,7 @@ public class ReportTimeValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		主动上报开始时间：");
+		sb.append("主动上报开始时间：");
 		sb.append(this.getStartTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.startTime.length; i < length; i++) {
@@ -88,9 +88,9 @@ public class ReportTimeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.startTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
-		sb.append("		主动上报结束时间：");
+		sb.append("主动上报结束时间：");
 		sb.append(this.getEndTime());
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.endTime.length; i < length; i++) {
@@ -98,7 +98,7 @@ public class ReportTimeValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.endTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}

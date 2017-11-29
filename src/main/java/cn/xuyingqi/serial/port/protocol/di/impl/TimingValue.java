@@ -84,7 +84,7 @@ public class TimingValue extends Di {
 
 		sb.append(super.toString());
 
-		sb.append("		日期时间：");
+		sb.append("日期时间：");
 		sb.append(DATETIME_SDF.format(this.getDateTime()));
 		sb.append(" [");
 		for (int i = 0, length = this.prototype.dateTime.length; i < length; i++) {
@@ -92,7 +92,7 @@ public class TimingValue extends Di {
 			sb.append(" ");
 			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.dateTime[i])));
 		}
-		sb.append("]");
+		sb.append("] # ");
 
 		return sb.toString();
 	}
