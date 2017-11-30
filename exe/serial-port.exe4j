@@ -18,9 +18,6 @@
   </splashScreen>
   <java mainClass="cn.xuyingqi.serial.port.gui.Main" mainMode="1" vmParameters="-Djava.library.path=C:/Windows/System32" arguments="" allowVMPassthroughParameters="true" preferredVM="client" bundleRuntime="true" minVersion="1.7" maxVersion="" allowBetaVM="false" jdkOnly="false">
     <searchSequence>
-      <registry />
-      <envVar name="JAVA_HOME" />
-      <envVar name="JDK_HOME" />
       <directory location="C:/Program Files/Java/jre1.8.0_77" />
     </searchSequence>
     <classPath>
