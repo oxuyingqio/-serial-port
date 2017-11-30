@@ -91,7 +91,13 @@ public class SerialPortDeal {
 									}
 									Subject.getInstance().notifyObservers(sb.toString());
 
-									Subject.getInstance().notifyObservers(datagram.toString());
+									try {
+
+										Subject.getInstance().notifyObservers(datagram.toString());
+									} catch (RuntimeException e) {
+
+										Subject.getInstance().notifyObservers("报文解析异常");
+									}
 								}
 							}
 						}

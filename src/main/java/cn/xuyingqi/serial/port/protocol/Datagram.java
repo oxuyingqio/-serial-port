@@ -677,7 +677,7 @@ public class Datagram {
 	 */
 	public static void main(String[] args) {
 
-		String str = "68 70 9f 08 01 81 0d 49 13 01 00 00 00 00 35 21 e1 07 0b 1d d1 16 ";
+		String str = "68 75 c9 33 01 81 01 4a a6 16 ";
 		byte[] temp = ByteUtils.doubleHexString2ByteArray(str.replace(" ", ""));
 
 		Datagram datagram = Datagram.newInstance((byte) 0x68);
