@@ -206,8 +206,7 @@ public class Datagram {
 						&& this.getFunction() == Function.WRITE)
 						|| (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
 								&& this.getFunction() == Function.READ)
-						|| (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
-								&& this.getFunction() == Function.REPORT)) {
+						|| this.getFunction() == Function.REPORT) {
 
 					switch (diValue) {
 					case TimingValue.DI:
@@ -264,10 +263,10 @@ public class Datagram {
 						di = new AerialRechargeValue();
 						break;
 					}
-				} else if ((this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
-						&& this.getFunction() == Function.WRITE)
-						|| (this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
-								&& this.getFunction() == Function.READ)) {
+				} else if ((this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
+						&& this.getFunction() == Function.READ)
+						|| (this.getTransmissionDirection() == TransmissionDirection.UPSTREAM
+								&& this.getFunction() == Function.WRITE)) {
 
 					switch (diValue) {
 					case TimingConfirm.DI:
@@ -677,7 +676,7 @@ public class Datagram {
 	 */
 	public static void main(String[] args) {
 
-		String str = "68 75 c9 33 01 81 01 4a a6 16 ";
+		String str = "68 75 c9 33 01 81 0d 4a e9 c9 00 00 00 08 38 00 e1 07 0b 1e b5 16 ";
 		byte[] temp = ByteUtils.doubleHexString2ByteArray(str.replace(" ", ""));
 
 		Datagram datagram = Datagram.newInstance((byte) 0x68);

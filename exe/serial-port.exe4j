@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exe4j version="6.0" transformSequenceNumber="2">
-  <directoryPresets config="G:/work/serial-port/exe" />
+  <directoryPresets config="" />
   <application name="xuyq" distributionSourceDir="D:/Users/XuYQ/Desktop">
     <languages>
       <principalLanguage id="en" customLocalizationFile="" />
@@ -18,7 +18,9 @@
   </splashScreen>
   <java mainClass="cn.xuyingqi.serial.port.gui.Main" mainMode="1" vmParameters="-Djava.library.path=C:/Windows/System32" arguments="" allowVMPassthroughParameters="true" preferredVM="client" bundleRuntime="true" minVersion="1.7" maxVersion="" allowBetaVM="false" jdkOnly="false">
     <searchSequence>
-      <directory location="C:/Program Files/Java/jre1.8.0_77" />
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
     </searchSequence>
     <classPath>
       <archive location="G:/work/serial-port/target/serial-port-0.0.1-jar-with-dependencies.jar" failOnError="false" />

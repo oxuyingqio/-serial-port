@@ -63,9 +63,9 @@ public class MonthlyFrozenDataValue extends Di {
 	 * 
 	 * @return
 	 */
-	public Short getGasConsumption() {
+	public Long getGasConsumption() {
 
-		return ByteUtils.byteArray2Short(this.prototype.gasConsumption);
+		return ByteUtils.byteArray2Long(ByteUtils.reverse(this.prototype.gasConsumption));
 	}
 
 	/**
@@ -73,9 +73,9 @@ public class MonthlyFrozenDataValue extends Di {
 	 * 
 	 * @return
 	 */
-	public Short getRunningState() {
+	public Integer getRunningState() {
 
-		return ByteUtils.byteArray2Short(this.prototype.runningState);
+		return ByteUtils.byteArray2Int(ByteUtils.reverse(this.prototype.runningState));
 	}
 
 	/**
