@@ -1,18 +1,17 @@
 package cn.xuyingqi.serial.port.test;
 
+import java.util.Arrays;
+
 import cn.xuyingqi.util.util.ByteUtils;
 
 public class T {
 
 	public static void main(String[] args) {
 
-		
-		
-		System.out.println(ByteUtils.byteArray2DoubleHexString((new byte[] { 16, 8, 32, 0, -106, -103, 57, -128, 1,
-				-128, 16, 97, 64, 48, 1, 32, 54, -128, 0, 21, -1, 2, 18, 0, 27, 5, -128, 63, 0, 0, 0, -15, 18, 0, 79,
-				11, -128, 33, 0, 1, 6, 0, 18, -72, 103, -65, -104, -100, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-				-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-				-1, -1, -1, -1, -1, -1, -1, -1 })));
+		byte[] temp = ByteUtils.doubleHexString2ByteArray(
+				"00A5000B00FFF4FFFFFFFFFFFFFFFFAAFF55FFFF16176161292D0D501B2D0900006A000A7B070000000000E5070015007056384834128101000A030000FF213E");
+
+		System.out.println(Arrays.toString(temp));
+		System.out.println(temp.length);
 	}
 }
