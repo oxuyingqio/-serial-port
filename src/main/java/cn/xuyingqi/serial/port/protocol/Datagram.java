@@ -534,6 +534,8 @@ public class Datagram {
 		 */
 		public boolean fill(byte data) {
 
+			System.out.println(Integer.toHexString(ByteUtils.byte2Int(data)));
+
 			// 长度
 			int length = 0;
 
@@ -676,7 +678,7 @@ public class Datagram {
 	 */
 	public static void main(String[] args) {
 
-		String str = "68 75 c9 33 01 81 0d 4a e9 c9 00 00 00 08 38 00 e1 07 0b 1e b5 16 ";
+		String str = "68 d7 63 e1 04 84 13 49 00 00 00 00 00 00 31 22 64 00 00 00 e1 07 0c 1c 16 00 44 16 ";
 		byte[] temp = ByteUtils.doubleHexString2ByteArray(str.replace(" ", ""));
 
 		Datagram datagram = Datagram.newInstance((byte) 0x68);
