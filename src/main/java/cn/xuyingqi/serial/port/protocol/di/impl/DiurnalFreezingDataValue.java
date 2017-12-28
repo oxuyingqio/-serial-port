@@ -99,6 +99,16 @@ public class DiurnalFreezingDataValue extends Di {
 	}
 
 	/**
+	 * 获取剩余气量
+	 * 
+	 * @return
+	 */
+	public Long getGasVolume() {
+
+		return ByteUtils.byteArray2Long(ByteUtils.reverse(this.prototype.gasVolume));
+	}
+
+	/**
 	 * 获取日期时间
 	 * 
 	 * @return
@@ -161,6 +171,16 @@ public class DiurnalFreezingDataValue extends Di {
 		}
 		sb.append("] # ");
 
+		sb.append("剩余气量：");
+		sb.append(this.getGasVolume());
+		sb.append(" [");
+		for (int i = 0, length = this.prototype.gasVolume.length; i < length; i++) {
+
+			sb.append(" ");
+			sb.append(Integer.toHexString(ByteUtils.byte2Int(this.prototype.gasVolume[i])));
+		}
+		sb.append("] # ");
+
 		sb.append("日期时间：");
 		sb.append(DATE_SDF.format(this.getDateTime()));
 		sb.append(" [");
@@ -199,6 +219,10 @@ public class DiurnalFreezingDataValue extends Di {
 		 */
 		private static final int LITHIUM_BATTERY_VOLTAGE_LENGTH = 1;
 		/**
+		 * 剩余气量默认长度
+		 */
+		private static final int GAS_VOLUME_LENGTH = 4;
+		/**
 		 * 日期时间默认长度
 		 */
 		private static final int DATE_TIME_LENGTH = 4;
@@ -219,6 +243,10 @@ public class DiurnalFreezingDataValue extends Di {
 		 * 锂电池电压
 		 */
 		private byte[] lithiumBatteryVoltage = new byte[LITHIUM_BATTERY_VOLTAGE_LENGTH];
+		/**
+		 * 剩余气量
+		 */
+		private byte[] gasVolume = new byte[GAS_VOLUME_LENGTH];
 		/**
 		 * 日期时间
 		 */
@@ -244,6 +272,9 @@ public class DiurnalFreezingDataValue extends Di {
 
 			System.arraycopy(data, index, this.lithiumBatteryVoltage, 0, this.lithiumBatteryVoltage.length);
 			index += this.lithiumBatteryVoltage.length;
+
+			System.arraycopy(data, index, this.gasVolume, 0, this.gasVolume.length);
+			index += this.gasVolume.length;
 
 			System.arraycopy(data, index, this.dateTime, 0, this.dateTime.length);
 			index += this.dateTime.length;
