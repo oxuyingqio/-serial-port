@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+import org.apache.log4j.Logger;
+
 import cn.xuyingqi.serial.port.model.Observer;
 import cn.xuyingqi.serial.port.model.Subject;
 
@@ -24,6 +26,8 @@ public class Receive extends JPanel implements Observer {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private static final Logger LOGGER = Logger.getLogger(Observer.class);
 
 	/**
 	 * 多行文本框
@@ -74,10 +78,14 @@ public class Receive extends JPanel implements Observer {
 	@Override
 	public void notify(String msg) {
 
-		this.jTextArea.append("[");
-		this.jTextArea.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-		this.jTextArea.append("] ");
-		this.jTextArea.append(msg);
-		this.jTextArea.append("\n");
+		LOGGER.info(msg);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		sb.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		sb.append("] ");
+		sb.append(msg);
+		sb.append("\n");
+		this.jTextArea.append(sb.toString());
 	}
 }

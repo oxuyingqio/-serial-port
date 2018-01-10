@@ -534,8 +534,6 @@ public class Datagram {
 		 */
 		public boolean fill(byte data) {
 
-			System.out.println(Integer.toHexString(ByteUtils.byte2Int(data)));
-
 			// 长度
 			int length = 0;
 
