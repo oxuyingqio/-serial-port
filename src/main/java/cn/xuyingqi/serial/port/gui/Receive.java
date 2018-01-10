@@ -79,13 +79,14 @@ public class Receive extends JPanel implements Observer {
 	public void notify(String msg) {
 
 		LOGGER.info(msg);
-		
+
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 		sb.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		sb.append("] ");
 		sb.append(msg);
 		sb.append("\n");
+		System.out.println(sb.toString());
 		this.jTextArea.append(sb.toString());
 	}
 }
