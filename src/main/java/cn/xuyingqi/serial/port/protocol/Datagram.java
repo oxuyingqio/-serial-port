@@ -4,44 +4,44 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.xuyingqi.serial.port.protocol.di.Di;
-import cn.xuyingqi.serial.port.protocol.di.impl.AerialRechargeConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.AerialRechargeValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.ApplicationMeasuringPoint;
-import cn.xuyingqi.serial.port.protocol.di.impl.Day;
-import cn.xuyingqi.serial.port.protocol.di.impl.DeleteMeasuringPointConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.DeleteMeasuringPointValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.DiurnalFreezingDataConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.DiurnalFreezingDataValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeasuringPointConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeasuringPointValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterAddressConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterAddressValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterAttributeConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterAttributeValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterOperationParamConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterOperationParamValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeterSet;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeteringOperationParamConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.MeteringOperationParamValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.MonthlyFrozenDataConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.MonthlyFrozenDataValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.NetworkingConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.NetworkingValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.ReportTimeConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.ReportTimeValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.SettlementSchemeConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.SettlementSchemeValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.TerminalRssi;
-import cn.xuyingqi.serial.port.protocol.di.impl.TimingConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.TimingValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.ValveConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.ValveValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.VersionConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.VersionValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.WakeUpTimeConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.WakeUpTimeValue;
-import cn.xuyingqi.serial.port.protocol.di.impl.WirelessParamConfirm;
-import cn.xuyingqi.serial.port.protocol.di.impl.WirelessParamValue;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di4B_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di4B_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di4C;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di52;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1E_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1E_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di49_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di49_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1B_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1B_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di19_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di19_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1F_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1F_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di26_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di26_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di53;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di2A_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di2A_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di4A_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di4A_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di48_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di48_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di27_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di27_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di2B_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di2B_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di16;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di12_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di12_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di44_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di44_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1A_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di1A_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di28_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di28_Value;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di25_Confirm;
+import cn.xuyingqi.serial.port.protocol.di.impl.Di25_Value;
 import cn.xuyingqi.serial.port.protocol.model.CommunicationState;
 import cn.xuyingqi.serial.port.protocol.model.Function;
 import cn.xuyingqi.serial.port.protocol.model.TransmissionDirection;
@@ -189,17 +189,17 @@ public class Datagram {
 			byte diValue = this.prototype.data[index];
 			// 判断DI值
 			switch (diValue) {
-			case TerminalRssi.DI:
-				di = new TerminalRssi();
+			case Di16.DI:
+				di = new Di16();
 				break;
-			case ApplicationMeasuringPoint.DI:
-				di = new ApplicationMeasuringPoint();
+			case Di4C.DI:
+				di = new Di4C();
 				break;
-			case Day.DI:
-				di = new Day();
+			case Di52.DI:
+				di = new Di52();
 				break;
-			case MeterSet.DI:
-				di = new MeterSet();
+			case Di53.DI:
+				di = new Di53();
 				break;
 			default:
 				if ((this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
@@ -209,58 +209,58 @@ public class Datagram {
 						|| this.getFunction() == Function.REPORT) {
 
 					switch (diValue) {
-					case TimingValue.DI:
-						di = new TimingValue();
+					case Di12_Value.DI:
+						di = new Di12_Value();
 						break;
-					case MeterAddressValue.DI:
-						di = new MeterAddressValue();
+					case Di19_Value.DI:
+						di = new Di19_Value();
 						break;
-					case VersionValue.DI:
-						di = new VersionValue();
+					case Di1A_Value.DI:
+						di = new Di1A_Value();
 						break;
-					case MeasuringPointValue.DI:
-						di = new MeasuringPointValue();
+					case Di1B_Value.DI:
+						di = new Di1B_Value();
 						break;
-					case DeleteMeasuringPointValue.DI:
-						di = new DeleteMeasuringPointValue();
+					case Di1E_Value.DI:
+						di = new Di1E_Value();
 						break;
-					case MeterAttributeValue.DI:
-						di = new MeterAttributeValue();
+					case Di1F_Value.DI:
+						di = new Di1F_Value();
 						break;
-					case WirelessParamValue.DI:
-						di = new WirelessParamValue();
+					case Di25_Value.DI:
+						di = new Di25_Value();
 						break;
-					case MeterOperationParamValue.DI:
-						di = new MeterOperationParamValue();
+					case Di26_Value.DI:
+						di = new Di26_Value();
 						break;
-					case ReportTimeValue.DI:
-						di = new ReportTimeValue();
+					case Di27_Value.DI:
+						di = new Di27_Value();
 						break;
-					case WakeUpTimeValue.DI:
-						di = new WakeUpTimeValue();
+					case Di28_Value.DI:
+						di = new Di28_Value();
 						break;
-					case MeteringOperationParamValue.DI:
-						di = new MeteringOperationParamValue();
+					case Di2A_Value.DI:
+						di = new Di2A_Value();
 						break;
-					case SettlementSchemeValue.DI:
-						di = new SettlementSchemeValue();
-						break;
-
-					case ValveConfirm.DI:
-						di = new ValveConfirm();
+					case Di2B_Value.DI:
+						di = new Di2B_Value();
 						break;
 
-					case NetworkingValue.DI:
-						di = new NetworkingValue();
+					case Di44_Confirm.DI:
+						di = new Di44_Confirm();
 						break;
-					case DiurnalFreezingDataValue.DI:
-						di = new DiurnalFreezingDataValue();
+
+					case Di48_Value.DI:
+						di = new Di48_Value();
 						break;
-					case MonthlyFrozenDataValue.DI:
-						di = new MonthlyFrozenDataValue();
+					case Di49_Value.DI:
+						di = new Di49_Value();
 						break;
-					case AerialRechargeValue.DI:
-						di = new AerialRechargeValue();
+					case Di4A_Value.DI:
+						di = new Di4A_Value();
+						break;
+					case Di4B_Value.DI:
+						di = new Di4B_Value();
 						break;
 					}
 				} else if ((this.getTransmissionDirection() == TransmissionDirection.DOWNSTREAM
@@ -269,58 +269,58 @@ public class Datagram {
 								&& this.getFunction() == Function.WRITE)) {
 
 					switch (diValue) {
-					case TimingConfirm.DI:
-						di = new TimingConfirm();
+					case Di12_Confirm.DI:
+						di = new Di12_Confirm();
 						break;
-					case MeterAddressConfirm.DI:
-						di = new MeterAddressConfirm();
+					case Di19_Confirm.DI:
+						di = new Di19_Confirm();
 						break;
-					case VersionConfirm.DI:
-						di = new VersionConfirm();
+					case Di1A_Confirm.DI:
+						di = new Di1A_Confirm();
 						break;
-					case MeasuringPointConfirm.DI:
-						di = new MeasuringPointConfirm();
+					case Di1B_Confirm.DI:
+						di = new Di1B_Confirm();
 						break;
-					case DeleteMeasuringPointConfirm.DI:
-						di = new DeleteMeasuringPointConfirm();
+					case Di1E_Confirm.DI:
+						di = new Di1E_Confirm();
 						break;
-					case MeterAttributeConfirm.DI:
-						di = new MeterAttributeConfirm();
+					case Di1F_Confirm.DI:
+						di = new Di1F_Confirm();
 						break;
-					case WirelessParamConfirm.DI:
-						di = new WirelessParamConfirm();
+					case Di25_Confirm.DI:
+						di = new Di25_Confirm();
 						break;
-					case MeterOperationParamConfirm.DI:
-						di = new MeterOperationParamConfirm();
+					case Di26_Confirm.DI:
+						di = new Di26_Confirm();
 						break;
-					case ReportTimeConfirm.DI:
-						di = new ReportTimeConfirm();
+					case Di27_Confirm.DI:
+						di = new Di27_Confirm();
 						break;
-					case WakeUpTimeConfirm.DI:
-						di = new WakeUpTimeConfirm();
+					case Di28_Confirm.DI:
+						di = new Di28_Confirm();
 						break;
-					case MeteringOperationParamConfirm.DI:
-						di = new MeteringOperationParamConfirm();
+					case Di2A_Confirm.DI:
+						di = new Di2A_Confirm();
 						break;
-					case SettlementSchemeConfirm.DI:
-						di = new SettlementSchemeConfirm();
-						break;
-
-					case ValveValue.DI:
-						di = new ValveValue();
+					case Di2B_Confirm.DI:
+						di = new Di2B_Confirm();
 						break;
 
-					case NetworkingConfirm.DI:
-						di = new NetworkingConfirm();
+					case Di44_Value.DI:
+						di = new Di44_Value();
 						break;
-					case DiurnalFreezingDataConfirm.DI:
-						di = new DiurnalFreezingDataConfirm();
+
+					case Di48_Confirm.DI:
+						di = new Di48_Confirm();
 						break;
-					case MonthlyFrozenDataConfirm.DI:
-						di = new MonthlyFrozenDataConfirm();
+					case Di49_Confirm.DI:
+						di = new Di49_Confirm();
 						break;
-					case AerialRechargeConfirm.DI:
-						di = new AerialRechargeConfirm();
+					case Di4A_Confirm.DI:
+						di = new Di4A_Confirm();
+						break;
+					case Di4B_Confirm.DI:
+						di = new Di4B_Confirm();
 						break;
 					}
 				}
